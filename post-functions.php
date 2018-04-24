@@ -1,21 +1,21 @@
 <?php
-  // TODO: General
+  // TODO: General https://github.com/ldahl264/countryCodes/issues/2 id:0
   // - [ ] Check and clean user input
   // - [ ] Display error message if no matches found or form submitted blank
 
-  // TODO: Filtering
+  // TODO: Filtering https://github.com/ldahl264/countryCodes/issues/4 id:2
   // - [ ] Sort results alphabetically by name and Population
   // - [ ] Limit results to 50
 
-  // TODO: Add to bottom of the page
+  // TODO: Add to bottom of the page https://github.com/ldahl264/countryCodes/issues/5 id:3
   // - [ ] Display the total number of countries
   // - [ ] Each region and subregion with number of times appeared
 
-  // TODO: Make sure it all runs using php -s
+  // TODO: Make sure it all runs using php -s https://github.com/ldahl264/countryCodes/issues/6 id:4
 
-  // TODO: Create readme with instructions for starting the server
+  // TODO: Create readme with instructions for starting the server https://github.com/ldahl264/countryCodes/issues/7 id:5
 
-  // TODO: Stretch Goals
+  // TODO: Stretch Goals https://github.com/ldahl264/countryCodes/issues/3 id:1
   // - [ ] Search by country name, code2, and code3 with a single text input.
   // - [ ] Use React JS.
   // - [ ] Implement some form of caching.
