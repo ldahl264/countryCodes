@@ -12,7 +12,7 @@ $(document).ready(function(){
           func: 'getCountry',
   				name: country,
           //code2: '',
-          //code3: ''
+          //code3: '' 
   			},
   			success: function(data, textStatus, XMLHttpRequest){
   				$("#results").html(data);
