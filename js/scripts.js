@@ -4,6 +4,17 @@ $(document).ready(function(){
     event.preventDefault();
 
     var country = $('#country').val();
+    var codeUsed = false;
+
+    if(country.length == 2) {
+      codeUsed = 'ac2';
+    }
+
+    if(country.length == 3) {
+      codeUsed = 'ac3';
+    }
+
+    console.log(codeUsed);
 
     $.ajax({
   			type: 'POST',
@@ -11,8 +22,7 @@ $(document).ready(function(){
   			data: {
           func: 'getCountry',
   				name: country,
-          //code2: '',
-          //code3: ''
+          code: codeUsed
   			},
   			success: function(data, textStatus, XMLHttpRequest){
   				$("#results").html(data);

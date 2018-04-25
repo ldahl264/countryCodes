@@ -1,4 +1,8 @@
 <?php
+  include 'views/single.php';
+  include 'views/name.php';
+  include 'views/error.php';
+
   // TODO: General https://github.com/ldahl264/countryCodes/issues/2 id:0
   // - [ ] Check and clean user input
   // - [ ] Display error message if no matches found or form submitted blank
@@ -29,54 +33,45 @@ if(isset($_POST['func'])){
       $name = $_POST['name'];
     }
 
-    $url = "https://restcountries.eu/rest/v2/name/$name?fields=name;alpha2Code;alpha3Code;flag;region;subregion;population;languages;";
-    $response = file_get_contents($url);
+    $codeUsed = false;
+    if(isset($_POST['code'])){
+      $codeUsed = $_POST['code'];
+    }
+
+    switch($codeUsed){
+      case 'ac2':
+        $url_base = 'http://restcountries.eu/rest/v2/alpha/';
+        break;
+      case 'ac3':
+        $url_base = 'http://restcountries.eu/rest/v2/alpha/';
+        break;
+      default:
+        $url_base = 'http://restcountries.eu/rest/v2/name/';
+        break;
+      }
+
+    /*
+    if($codeUsed == 'false'){
+      $url_base = 'http://restcountries.eu/rest/v2/name/';
+    }*/
+
+    $url = $url_base . "$name?fields=name;alpha2Code;alpha3Code;flag;region;subregion;population;languages;";
+    //$url = 'http://restcountries.eu/rest/v2/alpha/co';
+    pre($url);
+    @$response = file_get_contents($url);
+    if($response === FALSE){
+        errorNoMatches();
+    }
     $response = json_decode($response);
 
-    $regions = array();
-    $subregions = array();
+    if(count($response) == 1):
+      displaySingle($response);
+    elseif(count($response) > 1):
+      displayByName($response);
+    endif;
 
-    foreach($response as $country):
 
-      if(!in_array($country->region, $regions)):
-        $regions[] = $country->region;
-      endif;
 
-      if(!in_array($country->subregion, $subregions)):
-        $subregions[] = $country->subregion;
-      endif;
-
-    ?>
-
-      <div class="row">
-        <div class="col-md-3 col-sm-12">
-          <img src="<?php echo $country->flag; ?>" alt="<?php echo $country->name; ?>" />
-        </div>
-        <div class="col-md-5 col-sm-12">
-          <h2><?php echo $country->name; ?></h2>
-          <p>Population: <?php echo $country->population;?></p>
-          <p>Region: <?php echo $country->region; ?></p>
-          <p>Subregion: <?php echo $country->subregion; ?></p>
-        </div>
-        <div class="col-md-4 col-sm-12">
-          <h3>AC2: <?php echo $country->alpha2Code; ?> | AC3: <?php echo $country->alpha3Code; ?></h3>
-          <p>Languages</p>
-          <ul>
-            <?php foreach($country->languages as $language): ?>
-              <li><?php echo $language->nativeName; ?></li>
-            <?php endforeach; ?>
-          </ul>
-        </div>
-      </div>
-
-    <?php
-    endforeach;
-
-    pre(count($response));
-    pre(count($regions));
-    pre($regions);
-    pre(count($subregions));
-    pre($subregions);
 
     //pre($response);
   }
