@@ -31,6 +31,31 @@ function displaySingle($country){
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-12">
+        <h2>Matches found: <?php echo count($response); ?></h2>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <h2>Regions represented:</h2>
+        <ul>
+          <?php
+          foreach($regions as $region):
+            echo "<li>$region</li>";
+          endforeach;
+          ?>
+        </ul>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <h2>Sub-Regions represented:</h2>
+        <ul>
+          <?php
+          foreach($subregions as $subregion):
+            echo "<li>$subregion</li>";
+          endforeach;
+          ?>
+        </ul>
+      </div>
+    </div>
   <?php
   // Ideally this would be a React component
     pre(count($response));

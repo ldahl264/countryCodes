@@ -3,7 +3,7 @@ function displayByName($response){
   $regions = array();
   $subregions = array();
 
-  pre($response);
+  //pre($response);
 
   foreach($response as $country):
 
@@ -37,9 +37,35 @@ function displayByName($response){
         </ul>
       </div>
     </div>
+  <?php endforeach; ?>
 
-  <?php endforeach;
+  <div class="row">
+    <div class="col-12">
+      <h2>Matches found: <?php echo count($response); ?></h2>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <h2>Regions represented:</h2>
+      <ul>
+        <?php
+        foreach($regions as $region):
+          echo "<li>$region</li>";
+        endforeach;
+        ?>
+      </ul>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <h2>Sub-Regions represented:</h2>
+      <ul>
+        <?php
+        foreach($subregions as $subregion):
+          echo "<li>$subregion</li>";
+        endforeach;
+        ?>
+      </ul>
+    </div>
+  </div>
 
+<?php
     pre(count($response));
     pre(count($regions));
     pre($regions);
